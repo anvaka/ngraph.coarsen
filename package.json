@@ -4,7 +4,7 @@
   "description": "Given a community structure creates a coarse graph",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test/*.js"
   },
   "keywords": [
     "coarse",
@@ -17,5 +17,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/anvaka/ngraph.coarsen"
+  },
+  "devDependencies": {
+    "ngraph.graph": "0.0.12",
+    "tap": "^5.7.1"
   }
 }
