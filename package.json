@@ -1,0 +1,21 @@
+{
+  "name": "ngraph.coarsen",
+  "version": "1.0.0",
+  "description": "Given a community structure creates a coarse graph",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "coarse",
+    "graph",
+    "ngraph",
+    "community"
+  ],
+  "author": "Andrei Kashcha",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anvaka/ngraph.coarsen"
+  }
+}
