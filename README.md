@@ -6,7 +6,7 @@ Given a community structure creates a coarse graph
 
 ``` js
 // Let's say you have detected community of a graph using
-// ngraph.cw or ngraph.modularity:
+// ngraph.cw or ngraph.louvain:
 var community = detectCommunities(srcGraph);
 
 // To build a coarse graph:
@@ -28,8 +28,8 @@ The weight of this link is equal to weight of all weights within community.
 
 * https://github.com/anvaka/ngraph.graph - graph structure
 * https://github.com/anvaka/ngraph.cw - label-propagation based community detection
-* https://github.com/anvaka/ngraph.modularity - modularity optimization community
-detection
+* https://github.com/anvaka/ngraph.louvain - Louvain method for community detection
+(based on modularity optimization)
 
 # license
 
