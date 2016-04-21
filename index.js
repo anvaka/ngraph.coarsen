@@ -19,6 +19,7 @@ function coarsen(srcGraph, community) {
 
     if (fromCommunity === toCommunity) {
       makeSureNodeAdded(fromCommunity, srcLink.fromId);
+      makeSureNodeAdded(fromCommunity, srcLink.toId);
     } else {
       makeSureNodeAdded(fromCommunity, srcLink.fromId);
       makeSureNodeAdded(toCommunity, srcLink.toId);

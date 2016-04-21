@@ -25,6 +25,25 @@ test('simple graph with node as community', function(t) {
   t.end();
 });
 
+test('it adds all nodes inside a community', function(t) {
+  var srcGraph = createGraph();
+  srcGraph.addLink(1, 2);
+
+  var fakeCommunity = {
+    getClass: function getClass() {
+      return 1; // everyone belongs to the same community
+    }
+  }
+
+  var newGraph = coarsen(srcGraph, fakeCommunity);
+  var community = newGraph.getNode(1);
+  t.equals(community.data.size, 2, 'Both nodes are added');
+  t.ok(community.data.has(1), '1 is there');
+  t.ok(community.data.has(2), '2 is there');
+
+  t.end();
+});
+
 test('it accumulates weights', function(t) {
   var srcGraph = createGraph();
   srcGraph.addLink(1, 2);
