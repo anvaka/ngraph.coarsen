@@ -30,6 +30,32 @@ function coarsen(srcGraph, community) {
     link.data += getWeight(srcLink.data);
   });
 
+  var isolateNodes = new Set();
+  var isolateCommunityId;
+
+  srcGraph.forEachNode(function(node) {
+    // if node is islate the forEachLink will never visit it, which means
+    // its community class is never added to the graph:
+    var nodeCommunity = community.getClass(node.id);
+    if (graph.getNode(nodeCommunity)) {
+      // this was not an isolate. Ignore;
+      return;
+    }
+
+    if (isolateCommunityId === undefined) {
+      // we don't care which node will represent isolated community.
+      isolateCommunityId = node.id;
+    }
+    isolateNodes.add(node.id);
+  });
+
+  if (isolateNodes.size > 0) {
+    // Each node in the isolated noes has no links. So they all belong to the
+    // same community. We take arbitrary node from this class and assign them
+    // all to the same community:
+    graph.addNode(isolateCommunityId, isolateNodes);
+  }
+
   return graph;
 
   function makeSureNodeAdded(nodeId, srcNodeId) {

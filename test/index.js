@@ -59,7 +59,7 @@ test('it accumulates weights', function(t) {
 
   var newGraph = coarsen(srcGraph, fakeCommunity);
 
-  t.equals(newGraph.getLinksCount(), 3, 'There should be two links');
+  t.equals(newGraph.getLinksCount(), 3, 'There should be three links');
   t.equals(newGraph.getNodesCount(), 2, 'There are two nodes: even and odd');
 
   var loop = newGraph.getLink(1, 1);
@@ -79,6 +79,32 @@ test('it accumulates weights', function(t) {
 
   var even = newGraph.getNode(0).data;
   t.ok(even.has(2) && even.size === 1, 'even node has original node')
+
+  t.end();
+});
+
+test('it can handle isolate nodes', function(t) {
+  var srcGraph = createGraph();
+  srcGraph.addLink(1, 2);
+  srcGraph.addNode(3);
+  srcGraph.addNode(4);
+
+  var fakeCommunity = {
+    getClass: function getClass(nodeId) {
+      // now we pretend that if nodes are odd - they belong to the same community:
+      return (nodeId < 3) ? 1 : 2;
+    }
+  }
+
+  var newGraph = coarsen(srcGraph, fakeCommunity);
+  var selfLink = newGraph.getLink(1, 1);
+  t.equals(newGraph.getLinksCount(), 1, 'There should be one link');
+  t.ok(selfLink, 'and that is self link');
+
+  // the isolate nodes are assigned at random:
+  var node = newGraph.getNode(3) || newGraph.getNode(4);
+  t.equals(newGraph.getNodesCount(), 2, 'There are two nodes');
+  t.ok(node.data.has(3) && node.data.has(4), 'The isolate community lits all nodes');
 
   t.end();
 });
