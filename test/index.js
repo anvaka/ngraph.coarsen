@@ -91,7 +91,6 @@ test('it can handle isolate nodes', function(t) {
 
   var fakeCommunity = {
     getClass: function getClass(nodeId) {
-      // now we pretend that if nodes are odd - they belong to the same community:
       return (nodeId < 3) ? 1 : 2;
     }
   }
@@ -101,10 +100,36 @@ test('it can handle isolate nodes', function(t) {
   t.equals(newGraph.getLinksCount(), 1, 'There should be one link');
   t.ok(selfLink, 'and that is self link');
 
-  // the isolate nodes are assigned at random:
-  var node = newGraph.getNode(3) || newGraph.getNode(4);
+  var node = newGraph.getNode(2);
   t.equals(newGraph.getNodesCount(), 2, 'There are two nodes');
-  t.ok(node.data.has(3) && node.data.has(4), 'The isolate community lits all nodes');
+  t.ok(node.data.has(3) && node.data.has(4), 'The isolate community lists all nodes');
+
+  t.end();
+});
+
+test('it does not mix node ids with community ids', function(t) {
+  var srcGraph = createGraph();
+  srcGraph.addLink(1, 2);
+  srcGraph.addNode(3);
+  srcGraph.addNode(4);
+
+  var fakeCommunity = {
+    getClass: function getClass(nodeId) {
+      // communityId 3 is assigned to nodes 1 and 2.
+      // Note however that we also have a node with id 3.
+      return (nodeId < 3) ? 3 : 2;
+    }
+  }
+
+  var newGraph = coarsen(srcGraph, fakeCommunity);
+  var selfLink = newGraph.getLink(3, 3);
+  t.equals(newGraph.getLinksCount(), 1, 'There should be one link');
+  t.ok(selfLink, 'and that is self link');
+
+  // the isolate nodes are assigned at random:
+  var node = newGraph.getNode(2);
+  t.equals(newGraph.getNodesCount(), 2, 'There are two nodes');
+  t.ok(node.data.has(3) && node.data.has(4), 'The isolate community lists all nodes');
 
   t.end();
 });

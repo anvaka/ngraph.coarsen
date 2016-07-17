@@ -44,8 +44,9 @@ function coarsen(srcGraph, community) {
 
     if (isolateCommunityId === undefined) {
       // we don't care which node will represent isolated community.
-      isolateCommunityId = node.id;
+      isolateCommunityId = nodeCommunity;
     }
+
     isolateNodes.add(node.id);
   });
 
