@@ -51,7 +51,7 @@ function coarsen(srcGraph, community) {
   });
 
   if (isolateNodes.size > 0) {
-    // Each node in the isolated noes has no links. So they all belong to the
+    // Each node in the isolated nodes has no links. So they all belong to the
     // same community. We take arbitrary node from this class and assign them
     // all to the same community:
     graph.addNode(isolateCommunityId, isolateNodes);
