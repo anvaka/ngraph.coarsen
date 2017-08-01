@@ -168,6 +168,11 @@ test('it can get all subgraphs', function(t) {
   var allGraphs = coarsen.getSubgraphs(coarseGraph);
 
   t.equals(allGraphs.length, 2, 'Two communities - two graphs');
+  allGraphs.forEach(function(record) {
+    var node = coarseGraph.getNode(record.id);
+    t.ok(node, 'Coarse node id is valid');
+    t.equals(node.data.size,  record.graph.getNodesCount(), 'Number of nodes in subgraph is valid');
+  });
 
   t.end();
 });
