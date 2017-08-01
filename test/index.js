@@ -133,3 +133,41 @@ test('it does not mix node ids with community ids', function(t) {
 
   t.end();
 });
+
+test('it adds srcGraph to response', function(t) {
+  var srcGraph = createGraph();
+  srcGraph.addLink(1, 2);
+  srcGraph.addNode(3);
+  srcGraph.addNode(4);
+
+  var fakeCommunity = {
+    getClass: function getClass(nodeId) {
+      return (nodeId < 3) ? 3 : 2;
+    }
+  }
+
+  var newGraph = coarsen(srcGraph, fakeCommunity);
+  t.equals(newGraph.srcGraph, srcGraph, 'srcGraph is here.');
+
+  t.end();
+});
+
+test('it can get all subgraphs', function(t) {
+  var srcGraph = createGraph();
+  srcGraph.addLink(1, 2);
+  srcGraph.addNode(3);
+  srcGraph.addNode(4);
+
+  var fakeCommunity = {
+    getClass: function getClass(nodeId) {
+      return (nodeId < 3) ? 3 : 2;
+    }
+  }
+
+  var coarseGraph = coarsen(srcGraph, fakeCommunity);
+  var allGraphs = coarsen.getSubgraphs(coarseGraph);
+
+  t.equals(allGraphs.length, 2, 'Two communities - two graphs');
+
+  t.end();
+});

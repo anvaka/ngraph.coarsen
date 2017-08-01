@@ -1,6 +1,7 @@
 var createGraph = require('ngraph.graph');
 
 module.exports = coarsen;
+module.exports.getSubgraphs = require('./lib/getSubgraphs.js');
 
 function coarsen(srcGraph, community) {
   if (typeof community.canCoarse === 'function') {
@@ -56,6 +57,8 @@ function coarsen(srcGraph, community) {
     // all to the same community:
     graph.addNode(isolateCommunityId, isolateNodes);
   }
+
+  graph.srcGraph = srcGraph;
 
   return graph;
 

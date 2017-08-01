@@ -21,5 +21,8 @@
   "devDependencies": {
     "ngraph.graph": "0.0.12",
     "tap": "^5.7.1"
+  },
+  "dependencies": {
+    "ngraph.subgraph": "^1.0.0"
   }
 }
