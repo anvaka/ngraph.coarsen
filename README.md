@@ -24,6 +24,19 @@ between members of communities.
 Note: each node in the coarse graph can also have a link with itself (a self-reference).
 The weight of this link is equal to weight of all weights within community.
 
+### Array of subgraphs
+
+You can also get plain array of subgraphs for each found community:
+
+``` js
+var coarseGraph = coarsen(srcGraph, community)
+var subgraphs = coarsen.getSubgraphs(coarseGraph);
+// subgraphs is array, where each element has:
+// * id - community id
+// * graph - graph with nodes and edges that represent a subgraph of srcGraph
+```
+
+
 # See also
 
 * https://github.com/anvaka/ngraph.graph - graph structure
