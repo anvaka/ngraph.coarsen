@@ -10,9 +10,7 @@ function coarsen(srcGraph, community) {
     }
   }
 
-  var graph = createGraph({
-    uniqueLinkId: false
-  });
+  var graph = createGraph();
 
   srcGraph.forEachLink(function(srcLink) {
     var fromCommunity = community.getClass(srcLink.fromId);
