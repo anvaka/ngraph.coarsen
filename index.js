@@ -33,7 +33,7 @@ function coarsen(srcGraph, community) {
   var isolateCommunityId;
 
   srcGraph.forEachNode(function(node) {
-    // if node is islate the forEachLink will never visit it, which means
+    // if node is isolate the forEachLink will never visit it, which means
     // its community class is never added to the graph:
     var nodeCommunity = community.getClass(node.id);
     if (graph.getNode(nodeCommunity)) {
