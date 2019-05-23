@@ -1,6 +1,6 @@
 {
   "name": "ngraph.coarsen",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Given a community structure creates a coarse graph",
   "main": "index.js",
   "scripts": {
