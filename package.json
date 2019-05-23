@@ -19,8 +19,8 @@
     "url": "https://github.com/anvaka/ngraph.coarsen"
   },
   "devDependencies": {
-    "ngraph.graph": "0.0.14",
-    "tap": "^5.7.1"
+    "ngraph.graph": "^18.0.0",
+    "tap": "^14.1.7"
   },
   "dependencies": {
     "ngraph.subgraph": "^1.0.0"
