@@ -4,7 +4,7 @@
   "description": "Given a community structure creates a coarse graph",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap --branches=50 --lines=50 --statements=50 --functions=50 test/*.js"
   },
   "keywords": [
     "coarse",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "ngraph.graph": "^18.0.0",
-    "tap": "^14.1.7"
+    "tap": "^15.0.9"
   },
   "dependencies": {
     "ngraph.subgraph": "^1.0.0"
