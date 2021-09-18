@@ -176,3 +176,31 @@ test('it can get all subgraphs', function(t) {
 
   t.end();
 });
+
+
+test('it throws when getSubgraph has no argument', t => {
+  t.throws(() => coarsen.getSubgraphs({}), 'getSubgraphs() throws when no srcGraph is passed');
+  t.end();
+});
+
+test('it checks whether coarsening can be done', t => {
+  var srcGraph = createGraph();
+  srcGraph.addLink(1, 2);
+  srcGraph.addNode(3);
+  srcGraph.addNode(4);
+
+  var checkHasBeenDone = false;
+  var fakeCommunity = {
+    getClass: function getClass(nodeId) {
+      return (nodeId < 3) ? 3 : 2;
+    },
+    canCoarse: function () {
+      checkHasBeenDone = true;
+      return false;
+    }
+  }
+
+  coarsen(srcGraph, fakeCommunity);
+  t.equal(checkHasBeenDone, true, 'canCoarse() has been called');
+  t.end();
+})
